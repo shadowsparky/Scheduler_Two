@@ -27,6 +27,7 @@ import ru.shadowsparky.scheduler.dialogs.TimeDialog
 import ru.shadowsparky.scheduler.utils.LogUtils
 import ru.shadowsparky.scheduler.utils.MenuUtils
 import ru.shadowsparky.scheduler.utils.Schedule_Menu_Utils
+import ru.shadowsparky.scheduler.utils.Validator
 
 class SchedulersAddView : AppCompatActivity(), SchedulersAdd.SchedulersAddView {
     private lateinit var Time: Dialog
@@ -43,9 +44,14 @@ class SchedulersAddView : AppCompatActivity(), SchedulersAdd.SchedulersAddView {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp)
         presenter = SchedulersAddPresenter(this, SchedulersAddModel(applicationContext))
+    }
+
+    override fun onStart() {
+        super.onStart()
         Time = TimeDialog(this, schedule_menu_utils.getChooseCallback(choosed_time))
         Date = DateDialog(this, schedule_menu_utils.getChooseCallback(choosed_date))
-        initListeners()
+        choosed_time.setOnClickListener { Time.show() }
+        choosed_date.setOnClickListener { Date.show() }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -59,8 +65,6 @@ class SchedulersAddView : AppCompatActivity(), SchedulersAdd.SchedulersAddView {
             }
             return@setOnMenuItemClickListener true
         }
-
-        enableChecking(addButton)
         return true
     }
 
@@ -75,22 +79,10 @@ class SchedulersAddView : AppCompatActivity(), SchedulersAdd.SchedulersAddView {
         finish()
     }
 
-    override fun enableChecking(item: MenuItem) {
-        Observables.combineLatest(
-                RxTextView.textChanges(choosed_date),
-                RxTextView.textChanges(choosed_time),
-                RxTextView.textChanges(choosed_title),
-                RxTextView.textChanges(choosed_text))
-                { date, time, title, text -> (date.isNotBlank()) and (time.isNotBlank()) and (title.isNotBlank()) and (text.isNotBlank()) }
-                .subscribeBy(
-                        onNext = { check = it }
-                )
+    override fun enableChecking() {
+        val callback: (Boolean) -> Unit = { check = it }
+        Validator().verify(choosed_date, choosed_time, choosed_title, choosed_text, callback)
     }
 
     override fun showToast(message_id: Int) = Toast.makeText(this, message_id, Toast.LENGTH_SHORT).show()
-
-    private fun initListeners() {
-        choosed_time.setOnClickListener { Time.show() }
-        choosed_date.setOnClickListener { Date.show() }
-    }
 }

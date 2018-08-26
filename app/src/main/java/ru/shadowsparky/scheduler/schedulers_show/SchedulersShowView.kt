@@ -23,7 +23,7 @@ import androidx.core.content.ContextCompat
 
 
 class SchedulersShowView : AppCompatActivity(), SchedulersShow.View {
-    override fun enableChecking(item: MenuItem) {
+    override fun enableChecking() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

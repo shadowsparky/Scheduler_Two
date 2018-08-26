@@ -13,8 +13,12 @@ class SchedulersAddPresenter(
         private val view: SchedulersAdd.SchedulersAddView,
         private val model: SchedulersAdd.SchedulersAddModel
 ) : SchedulersAdd.SchedulersAddPresenter {
+
+    init {
+        view.enableChecking()
+    }
+
     override fun onScheduleCompleted(date: String, time: String, title: String, text: String, handleResult: SchedulersAdd.HandleResult) {
         model.schedule(date, time, title, text, handleResult)
     }
-
 }

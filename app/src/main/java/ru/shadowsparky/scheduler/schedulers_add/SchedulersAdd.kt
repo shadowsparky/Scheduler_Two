@@ -9,7 +9,7 @@ interface SchedulersAdd {
     interface SchedulersAddView {
         fun showToast(message_id: Int)
         fun hide(intent: Intent)
-        fun enableChecking(item: MenuItem)
+        fun enableChecking()
     }
     interface SchedulersAddPresenter {
         fun onScheduleCompleted(date: String, time: String, title: String, text: String, handleResult: HandleResult)
