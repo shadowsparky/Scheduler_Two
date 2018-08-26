@@ -33,6 +33,7 @@ class SchedulersView : AppCompatActivity(), SchedulersMenu.SchedulersView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppThemeWithoutBar)
         setContentView(R.layout.activity_schedulers_view)
         schedule_add.setOnClickListener {
             presenter.onAddAppointmentClicked()

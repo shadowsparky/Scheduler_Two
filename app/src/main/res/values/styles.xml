@@ -15,4 +15,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Startup" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
+
 </resources>

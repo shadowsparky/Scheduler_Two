@@ -13,6 +13,8 @@ class NotificationReceiver : BroadcastReceiver() {
         if (code == -1) {
             title = "Привет!"
             message = "У тебя новое напоминание!"
+        } else if (title.isBlank()) {
+            title = "Новое напоминание"
         }
         val notificationWorker = NotificationWorker(context)
         notificationWorker.sendNotification(title, message)

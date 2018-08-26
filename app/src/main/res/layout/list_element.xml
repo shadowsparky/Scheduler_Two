@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:padding="4dp"
     android:layout_height="150dp">
@@ -8,35 +9,91 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/element_title"
-                android:layout_margin="8dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="dddddddddddddddddddddd"
+                android:layout_height="30dp"
                 android:maxLength="12"
+                android:text="Title"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 android:transitionName="title"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"></TextView>
 
             <TextView
-                android:layout_margin="8dp"
                 android:id="@+id/element_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLength="40"
+                android:text="Text"
                 android:textSize="16sp"
-                android:maxLength="50"
-                android:text="test"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/element_title" />
+
+            <LinearLayout
+                android:id="@+id/element_footer"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="bottom"
+                android:background="@color/element_time"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/element_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="13.03.2001"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/element_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:text="10:00"
+                    android:textColor="@android:color/white" />
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--<androidx.constraintlayout.widget.ConstraintLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/element_title"-->
+                <!--android:layout_margin="8dp"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textStyle="bold"-->
+                <!--android:text="dddddddddddddddddddddd"-->
+                <!--android:maxLength="12"-->
+                <!--android:textSize="20sp"-->
+                <!--android:transitionName="title"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<TextView-->
+                <!--android:layout_margin="8dp"-->
+                <!--android:id="@+id/element_text"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="16sp"-->
+                <!--android:maxLength="50"-->
+                <!--android:text="test"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/element_title" />-->
+        <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
 
     </androidx.cardview.widget.CardView>
 </LinearLayout>
