@@ -17,7 +17,25 @@ class Validator {
                 RxTextView.textChanges(text))
                 { date, time, title, text -> (date.isNotBlank()) and (time.isNotBlank()) and (title.isNotBlank()) and (text.isNotBlank()) }
                 .subscribeBy(
-                        onNext = { callback(it) }
+                    onNext = { callback(it) }
+                )
+    }
+
+    fun verifyText(text: EditText, callback: (Boolean) -> Unit) {
+        RxTextView.textChanges(text)
+                .map { it.isNotBlank() }
+                .subscribeBy (
+                    onNext = { callback(it) }
+                )
+    }
+
+    fun verifySchedule(date: Button, time: Button, callback: (Boolean) -> Unit) {
+        Observables.combineLatest(
+                RxTextView.textChanges(date),
+                RxTextView.textChanges(time))
+                { date, time -> (date.isNotBlank()) and (time.isNotBlank()) }
+                .subscribeBy(
+                    onNext = { callback(it) }
                 )
     }
 }

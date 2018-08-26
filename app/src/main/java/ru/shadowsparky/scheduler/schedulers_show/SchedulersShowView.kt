@@ -19,21 +19,20 @@ import ru.shadowsparky.scheduler.schedulers_add.SchedulersAddPresenter
 import ru.shadowsparky.scheduler.utils.MenuUtils
 import ru.shadowsparky.scheduler.utils.Schedule_Menu_Utils
 import androidx.core.content.ContextCompat
-
+import kotlinx.android.synthetic.main.time_dialog.*
+import ru.shadowsparky.scheduler.dialogs.ScheduleDialog
+import ru.shadowsparky.scheduler.utils.Validator
 
 
 class SchedulersShowView : AppCompatActivity(), SchedulersShow.View {
-    override fun enableChecking() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     private var data: Schedulers? = null
     private val schedule_menu_utils = Schedule_Menu_Utils(this)
     private val utils = MenuUtils()
-    private lateinit var time: Dialog
-    private lateinit var date: Dialog
+    private var time = ""
+    private var date = ""
     private var position: Int = -1
     private lateinit var presenter: SchedulersShow.Presenter
+    private var check = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +42,6 @@ class SchedulersShowView : AppCompatActivity(), SchedulersShow.View {
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp)
         data = intent.getSerializableExtra("Saved_Data") as Schedulers
         position = intent.getIntExtra("Position", -1)
-        time = TimeDialog(this, schedule_menu_utils.getChooseCallback(choosed_time))
-        date = DateDialog(this, schedule_menu_utils.getChooseCallback(choosed_date))
         presenter = SchedulersShowPresenter(this, SchedulersShowModel(applicationContext, data!!, position))
         initControls()
     }
@@ -56,16 +53,31 @@ class SchedulersShowView : AppCompatActivity(), SchedulersShow.View {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val addButton = utils.getItemWithInflate(menuInflater, menu!!, R.id.schedule_add)
-        val deleteButton = utils.getItem(menu!!, R.id.schedule_delete)
+        val deleteButton = utils.getItem(menu, R.id.schedule_delete)
+        val set_timeButton = utils.getItem(menu, R.id.schedule_try)
         addButton.setOnMenuItemClickListener {
-                    presenter.onScheduleCompleted(choosed_date.text.toString(), choosed_time.text.toString(),
-                        choosed_title.text.toString(), choosed_text.text.toString(), schedule_menu_utils.resultCallback())
-                    return@setOnMenuItemClickListener true
+            if (check) {
+                presenter.onFinish(date, time,
+                    choosed_title.text.toString(), choosed_text.text.toString(), schedule_menu_utils.resultCallback())
+            } else {
+                choosed_text.error = "Это поле обязательно для заполнения"
+            }
+            return@setOnMenuItemClickListener true
         }
         deleteButton.isVisible = true
         deleteButton.setOnMenuItemClickListener {
-                    presenter.onScheduleDelete(data!!, schedule_menu_utils.resultCallback())
-                    return@setOnMenuItemClickListener true
+            presenter.onScheduleDelete(data!!, schedule_menu_utils.resultCallback())
+            return@setOnMenuItemClickListener true
+        }
+        val callback: (String, String) -> Unit = { date, time ->
+            this.date = date
+            this.time = time
+        }
+        date = data!!.date!!
+        time = data!!.time!!
+        set_timeButton.setOnMenuItemClickListener {
+            ScheduleDialog(this, callback, date, time).show()
+            return@setOnMenuItemClickListener true
         }
         return true
     }
@@ -78,11 +90,14 @@ class SchedulersShowView : AppCompatActivity(), SchedulersShow.View {
     }
 
     private fun initControls() {
-        choosed_date.text = data!!.date
-        choosed_time.text = data!!.time
         choosed_title.setText(data!!.title)
         choosed_text.setText(data!!.text)
-        choosed_date.setOnClickListener { date.show() }
-        choosed_time.setOnClickListener { time.show() }
+    }
+
+    override fun enableChecking() {
+        val callback: (Boolean) -> Unit = {
+            check = it
+        }
+        Validator().verifyText(choosed_text, callback)
     }
 }

@@ -9,11 +9,23 @@ class SchedulersShowPresenter(
         private val model: SchedulersShow.Model
 ) : SchedulersShow.Presenter {
 
-    override fun onScheduleDelete(item: Schedulers, handler: SchedulersAdd.HandleResult) {
-        model.deleteRequest(item, handler)
+    init {
+        onEnableChecking()
     }
 
-    override fun onScheduleCompleted(date: String, time: String, title: String, text: String, handleResult: SchedulersAdd.HandleResult) {
-        model.schedule(date, time, title, text, handleResult)
+    override fun onEnableChecking() {
+        view.enableChecking()
+    }
+
+    override fun onFinish(date: String, time: String, title: String, text: String, callback: SchedulersAdd.HandleResult) {
+        if (date.isNotBlank() and time.isNotBlank()) {
+            model.createSchedule(date, time, title, text, callback)
+        } else {
+            model.createTask(title, text, callback)
+        }
+    }
+
+    override fun onScheduleDelete(item: Schedulers, handler: SchedulersAdd.HandleResult) {
+        model.deleteRequest(item, handler)
     }
 }

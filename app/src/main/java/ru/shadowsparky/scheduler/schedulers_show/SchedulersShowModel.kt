@@ -40,8 +40,9 @@ class SchedulersShowModel(
                 )
     }
 
-    override fun schedule(date: String, time: String, title: String, text: String, handler: SchedulersAdd.HandleResult) {
+    override fun createSchedule(date: String, time: String, title: String, text: String, callback: SchedulersAdd.HandleResult) {
         val db = DatabaseInitialization.getDB(context).getSchedulesDB()
+        val data = Schedulers()
         Observable.just(data)
                 .observeOn(io.reactivex.schedulers.Schedulers.io())
                 .doOnNext {
@@ -49,19 +50,40 @@ class SchedulersShowModel(
                     it.time = time
                     it.title = title
                     it.text = text
+                    it.id = this.data.id!!.toInt()
                     db.update(it)
-                    NotificationScheduler(context).scheduleNotification(date, time, title, text, it.id!!.toInt())
+                    NotificationScheduler(context).scheduleNotification(date, time, title, text, it.id!!)
                 }
-                .map {
-                    Intent()
-                        .putExtra(RESULT, it)
+                .map { Intent().putExtra("RESULT", it)
                         .putExtra(MODE, UPDATE_MODE)
-                        .putExtra(POSITION, position)
+                        .putExtra(POSITION, position)}
+                .subscribeBy (
+                        onNext = { callback.handleResult(it) },
+                        onError = { LogUtils.print("UPDATE SCHEDULE ERROR: $it") },
+                        onComplete = { LogUtils.print("Schedule updated successfully!")}
+                )
+    }
+
+    override fun createTask(title: String, text: String, callback: SchedulersAdd.HandleResult) {
+        val db = DatabaseInitialization.getDB(context).getSchedulesDB()
+        val data = Schedulers()
+        Observable.just(data)
+                .observeOn(io.reactivex.schedulers.Schedulers.io())
+                .doOnNext {
+                    it.date = ""
+                    it.time = ""
+                    it.title = title
+                    it.text = text
+                    it.id = this.data.id!!.toInt()
+                    db.update(it)
                 }
-                .subscribeBy(
-                        onNext = { handler.handleResult(it) },
-                        onError = { "UPDATE ITEM FAILED. ERROR: '$it'" },
-                        onComplete = { "Update completed successfully" }
+                .map { Intent().putExtra("RESULT", it)
+                        .putExtra(MODE, UPDATE_MODE)
+                        .putExtra(POSITION, position)}
+                .subscribeBy (
+                        onNext = { callback.handleResult(it) },
+                        onError = { LogUtils.print("UPDATE TASK ERROR: $it") },
+                        onComplete = { LogUtils.print("Task updated successfully!")}
                 )
     }
 }

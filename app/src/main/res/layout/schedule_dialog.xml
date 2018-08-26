@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:layout_marginBottom="8dp"
+        android:textStyle="bold"
+        android:text="Добавить напоминание" />
+    <Button
+        android:id="@+id/choosed_date"
+        style="@style/Widget.AppCompat.Spinner"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/choose_date">
+    </Button>
+
+    <Button
+        android:id="@+id/choosed_time"
+        style="@style/Widget.AppCompat.Spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/choose_time">
+    </Button>
+
+    <LinearLayout
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/schedule_cancel"
+            android:layout_width="wrap_content"
+            android:text="@string/cancel"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/schedule_ok"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:text="@string/save"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

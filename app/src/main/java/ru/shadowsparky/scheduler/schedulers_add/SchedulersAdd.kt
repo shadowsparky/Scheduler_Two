@@ -12,10 +12,12 @@ interface SchedulersAdd {
         fun enableChecking()
     }
     interface SchedulersAddPresenter {
-        fun onScheduleCompleted(date: String, time: String, title: String, text: String, handleResult: HandleResult)
+        fun onEnableChecking()
+        fun onFinish(date: String, time: String, title: String, text: String, callback: HandleResult)
     }
     interface SchedulersAddModel {
-        fun schedule(date: String, time: String, title: String, text: String, handleResult: HandleResult)
+        fun createTask(title: String, text: String, callback: HandleResult)
+        fun createSchedule(date: String, time: String, title: String, text: String, callback: HandleResult)
     }
     interface HandleResult {
         fun handleResult(intent: Intent)

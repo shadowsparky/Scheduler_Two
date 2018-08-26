@@ -13,8 +13,7 @@ class SchedulersAddModel(
         val context: Context
 ) : SchedulersAdd.SchedulersAddModel {
 
-
-    override fun schedule(date: String, time: String, title: String, text: String, callback: SchedulersAdd.HandleResult) {
+    override fun createSchedule(date: String, time: String, title: String, text: String, callback: SchedulersAdd.HandleResult) {
         val db = DatabaseInitialization.getDB(context).getSchedulesDB()
         val data = Schedulers()
         Observable.just(data)
@@ -34,4 +33,25 @@ class SchedulersAddModel(
                         onComplete = { LogUtils.print("Scheduling successfully!")}
                 )
     }
+
+    override fun createTask(title: String, text: String, callback: SchedulersAdd.HandleResult) {
+        val db = DatabaseInitialization.getDB(context).getSchedulesDB()
+        val data = Schedulers()
+        Observable.just(data)
+                .observeOn(io.reactivex.schedulers.Schedulers.io())
+                .doOnNext {
+                    it.date = ""
+                    it.time = ""
+                    it.title = title
+                    it.text = text
+                    it.id = db.add(it).toInt()
+                }
+                .map { Intent().putExtra("RESULT", it) }
+                .subscribeBy (
+                        onNext = { callback.handleResult(it) },
+                        onError = { LogUtils.print("CREATE TASK ERROR: $it") },
+                        onComplete = { LogUtils.print("Task created successfully!")}
+                )
+    }
+
 }

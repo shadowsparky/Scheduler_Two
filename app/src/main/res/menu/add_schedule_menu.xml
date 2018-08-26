@@ -3,6 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/schedule_try"
+        android:icon="@drawable/ic_access_time_white_24dp"
+        app:showAsAction="always"
+        android:title="@string/app_name">
+    </item>
+
+    <item
         android:id="@+id/schedule_delete"
         android:icon="@drawable/ic_delete_forever_white_24dp"
         app:showAsAction="always"
