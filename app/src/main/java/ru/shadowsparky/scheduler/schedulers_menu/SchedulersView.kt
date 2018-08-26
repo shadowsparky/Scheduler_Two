@@ -15,10 +15,10 @@ import kotlinx.android.synthetic.main.activity_schedulers_view.*
 import ru.shadowsparky.scheduler.R
 import ru.shadowsparky.scheduler.adapters.SchedulersList
 import ru.shadowsparky.scheduler.room_utils.Schedulers
-import ru.shadowsparky.scheduler.schedulers_add.SchedulersAddView
-import ru.shadowsparky.scheduler.schedulers_show.SchedulersShowModel.Companion.MODE
-import ru.shadowsparky.scheduler.schedulers_show.SchedulersShowModel.Companion.POSITION
-import ru.shadowsparky.scheduler.schedulers_show.SchedulersShowView
+import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_add.SchedulersAddView
+import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_show.SchedulersShowModel.Companion.MODE
+import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_show.SchedulersShowModel.Companion.POSITION
+import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_show.SchedulersShowView
 import ru.shadowsparky.scheduler.utils.LogUtils
 
 

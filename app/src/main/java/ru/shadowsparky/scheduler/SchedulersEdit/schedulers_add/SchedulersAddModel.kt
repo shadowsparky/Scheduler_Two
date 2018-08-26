@@ -1,4 +1,4 @@
-package ru.shadowsparky.scheduler.schedulers_add
+package ru.shadowsparky.scheduler.SchedulersEdit.schedulers_add
 
 import android.content.Context
 import android.content.Intent
@@ -13,7 +13,7 @@ class SchedulersAddModel(
         val context: Context
 ) : SchedulersAdd.SchedulersAddModel {
 
-    override fun createSchedule(date: String, time: String, title: String, text: String, callback: SchedulersAdd.HandleResult) {
+    override fun scheduleRequest(date: String, time: String, title: String, text: String, callback: SchedulersAdd.HandleResult) {
         val db = DatabaseInitialization.getDB(context).getSchedulesDB()
         val data = Schedulers()
         Observable.just(data)
@@ -34,7 +34,7 @@ class SchedulersAddModel(
                 )
     }
 
-    override fun createTask(title: String, text: String, callback: SchedulersAdd.HandleResult) {
+    override fun taskRequest(title: String, text: String, callback: SchedulersAdd.HandleResult) {
         val db = DatabaseInitialization.getDB(context).getSchedulesDB()
         val data = Schedulers()
         Observable.just(data)

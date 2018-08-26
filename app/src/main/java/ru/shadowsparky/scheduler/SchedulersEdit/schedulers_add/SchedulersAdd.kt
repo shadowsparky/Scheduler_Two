@@ -1,9 +1,6 @@
-package ru.shadowsparky.scheduler.schedulers_add
+package ru.shadowsparky.scheduler.SchedulersEdit.schedulers_add
 
 import android.content.Intent
-import android.view.MenuItem
-import io.reactivex.subjects.PublishSubject
-import java.util.*
 
 interface SchedulersAdd {
     interface SchedulersAddView {
@@ -16,8 +13,8 @@ interface SchedulersAdd {
         fun onFinish(date: String, time: String, title: String, text: String, callback: HandleResult)
     }
     interface SchedulersAddModel {
-        fun createTask(title: String, text: String, callback: HandleResult)
-        fun createSchedule(date: String, time: String, title: String, text: String, callback: HandleResult)
+        fun taskRequest(title: String, text: String, callback: HandleResult)
+        fun scheduleRequest(date: String, time: String, title: String, text: String, callback: HandleResult)
     }
     interface HandleResult {
         fun handleResult(intent: Intent)

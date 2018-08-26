@@ -4,10 +4,15 @@
 
 <resources>
     <string name="app_name">Scheduler</string>
+    <string name="scheduler">Заметки</string>
     <string name="cancel">Отменить</string>
     <string name="save">Сохранить</string>
+    <string name="choose">Выбрать</string>
     <string name="choose_time">Выберите время</string>
     <string name="choose_date">Выберите дату</string>
     <string name="choose_title">Название</string>
     <string name="choose_text">Описание</string>
+    <string name="schedule_add">Добавить напоминание</string>
+    <string name="remove">Удалить</string>
+    <string name="set_time">Установить время</string>
 </resources>

@@ -9,14 +9,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AppThemeWithoutBar"
-    tools:context=".schedulers_add.SchedulersAddView">
+    tools:context=".SchedulersEdit.schedulers_add.SchedulersAddView">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/add_toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/colorPrimary"
-        app:title="@string/app_name"
+        app:title=""
         app:titleTextColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
             android:layout_height="30dp"
             android:layout_margin="8dp"
             android:background="@android:color/transparent"
-            android:hint="title"
+            android:hint="@string/choose_title"
             android:inputType="text"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
@@ -72,7 +72,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@android:color/transparent"
-                android:hint="text"
+                android:hint="@string/choose_text"
                 android:inputType="textMultiLine"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -6,7 +6,7 @@
         android:id="@+id/schedule_try"
         android:icon="@drawable/ic_access_time_white_24dp"
         app:showAsAction="always"
-        android:title="@string/app_name">
+        android:title="@string/set_time">
     </item>
 
     <item
@@ -14,13 +14,13 @@
         android:icon="@drawable/ic_delete_forever_white_24dp"
         app:showAsAction="always"
         android:visible="false"
-        android:title="@string/app_name">
+        android:title="@string/remove">
     </item>
 
     <item
         android:id="@+id/schedule_add"
         android:icon="@drawable/ic_check_circle_whie_24dp"
         app:showAsAction="always"
-        android:title="@string/app_name">
+        android:title="@string/save">
     </item>
 </menu>

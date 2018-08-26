@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.date_dialog.*
+import kotlinx.android.synthetic.main.date_dialog.view.*
 import ru.shadowsparky.scheduler.R
 
 open class DateDialog(
@@ -16,6 +17,7 @@ open class DateDialog(
         super.onCreate(savedInstanceState)
         setContentView(R.layout.date_dialog)
         choose_date.setOnClickListener { onDateChoosed() }
+        date_picker.minDate = System.currentTimeMillis()
     }
 
     private fun onDateChoosed() {

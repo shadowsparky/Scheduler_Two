@@ -6,10 +6,9 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import ru.shadowsparky.scheduler.schedulers_menu.SchedulersView.Companion.APPOINTMENT_ADD_CODE
 import ru.shadowsparky.scheduler.schedulers_menu.SchedulersView.Companion.APPOINTMENT_SHOW_CODE
-import ru.shadowsparky.scheduler.schedulers_show.SchedulersShowModel.Companion.DELETE_MODE
-import ru.shadowsparky.scheduler.schedulers_show.SchedulersShowModel.Companion.UPDATE_MODE
+import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_show.SchedulersShowModel.Companion.DELETE_MODE
+import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_show.SchedulersShowModel.Companion.UPDATE_MODE
 import ru.shadowsparky.scheduler.utils.LogUtils
-import java.text.FieldPosition
 
 class SchedulersPresenter(
         private val view: SchedulersMenu.SchedulersView,

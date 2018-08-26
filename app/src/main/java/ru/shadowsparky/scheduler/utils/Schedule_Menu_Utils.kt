@@ -1,16 +1,10 @@
 package ru.shadowsparky.scheduler.utils
 
-import android.content.Context
 import android.content.Intent
-import android.view.Menu
-import android.view.MenuInflater
 import android.widget.Button
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.activity_schedulers_add.*
-import ru.shadowsparky.scheduler.R
-import ru.shadowsparky.scheduler.schedulers_add.SchedulersAdd
-import ru.shadowsparky.scheduler.schedulers_show.SchedulersShow
+import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_add.SchedulersAdd
 
 open class Schedule_Menu_Utils(private val view: SchedulersAdd.SchedulersAddView) {
 

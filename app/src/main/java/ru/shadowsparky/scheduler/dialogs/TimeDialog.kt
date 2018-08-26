@@ -8,6 +8,7 @@ import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.time_dialog.*
+import kotlinx.android.synthetic.main.time_dialog.view.*
 import org.reactivestreams.Subscription
 import ru.shadowsparky.scheduler.R
 

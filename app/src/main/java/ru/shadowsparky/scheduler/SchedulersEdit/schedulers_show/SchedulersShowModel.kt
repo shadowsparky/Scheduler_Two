@@ -1,6 +1,6 @@
-package ru.shadowsparky.scheduler.schedulers_show
+package ru.shadowsparky.scheduler.SchedulersEdit.schedulers_show
 
-import ru.shadowsparky.scheduler.schedulers_add.SchedulersAdd
+import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_add.SchedulersAdd
 import android.content.Context
 import android.content.Intent
 import io.reactivex.Observable
@@ -40,7 +40,7 @@ class SchedulersShowModel(
                 )
     }
 
-    override fun createSchedule(date: String, time: String, title: String, text: String, callback: SchedulersAdd.HandleResult) {
+    override fun scheduleRequest(date: String, time: String, title: String, text: String, callback: SchedulersAdd.HandleResult) {
         val db = DatabaseInitialization.getDB(context).getSchedulesDB()
         val data = Schedulers()
         Observable.just(data)
@@ -52,6 +52,7 @@ class SchedulersShowModel(
                     it.text = text
                     it.id = this.data.id!!.toInt()
                     db.update(it)
+                    NotificationScheduler(context).removeSchedule(it.id!!)
                     NotificationScheduler(context).scheduleNotification(date, time, title, text, it.id!!)
                 }
                 .map { Intent().putExtra("RESULT", it)
@@ -64,7 +65,7 @@ class SchedulersShowModel(
                 )
     }
 
-    override fun createTask(title: String, text: String, callback: SchedulersAdd.HandleResult) {
+    override fun taskRequest(title: String, text: String, callback: SchedulersAdd.HandleResult) {
         val db = DatabaseInitialization.getDB(context).getSchedulesDB()
         val data = Schedulers()
         Observable.just(data)
