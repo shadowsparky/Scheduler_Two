@@ -12,11 +12,12 @@ abstract class SchedulersEditPresenter(
         view.enableChecking()
     }
 
-    override fun onFinish(date: String, time: String, title: String, text: String, callback: SchedulersAdd.HandleResult) {
+    override fun onFinish(date: String, time: String, title: String, text: String, callback: SchedulersAdd.HandleResult, loading: (Boolean) -> Unit) {
+        loading(true)
         if (date.isNotBlank() and time.isNotBlank()) {
-            model.scheduleRequest(date, time, title, text, callback)
+            model.scheduleRequest(date, time, title, text, callback, loading)
         } else {
-            model.taskRequest(title, text, callback)
+            model.taskRequest(title, text, callback, loading)
         }
     }
 }

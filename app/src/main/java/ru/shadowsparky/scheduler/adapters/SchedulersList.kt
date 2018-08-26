@@ -3,6 +3,7 @@ package ru.shadowsparky.scheduler.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -18,15 +19,17 @@ open class SchedulersList(
 ) : RecyclerView.Adapter<SchedulersList.MainViewHolder>() {
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        if (data[position].title!!.isNotBlank())
+        if (data[position].title!!.isNotBlank()) {
+            holder.title.visibility = VISIBLE
             holder.title.text = data[position].title
-        else
+        } else
             holder.title.visibility = GONE
         holder.text.text = data[position].text
         holder.card.setOnClickListener {
             callback.onItemTouched(data[position], holder.card, position)
         }
         if (data[position].date!!.isNotBlank()) {
+            holder.scheduleLayout.visibility = VISIBLE
             holder.date.text = data[position].date
             holder.time.text = data[position].time
         } else {
@@ -45,7 +48,8 @@ open class SchedulersList(
 
     fun add(item: Schedulers) {
         data.add(item)
-        this.notifyItemInserted(data.size)
+//        this.notifyItemInserted(item)
+        this.notifyDataSetChanged()
     }
 
     fun remove(index: Int) {
@@ -57,6 +61,7 @@ open class SchedulersList(
     fun update(item: Schedulers, position: Int) {
         data[position] = item
         this.notifyItemChanged(position)
+        this.notifyDataSetChanged()
     }
 
     open class MainViewHolder : RecyclerView.ViewHolder {

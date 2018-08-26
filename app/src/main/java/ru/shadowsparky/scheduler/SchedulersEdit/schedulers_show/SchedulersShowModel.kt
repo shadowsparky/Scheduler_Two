@@ -4,6 +4,7 @@ import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_add.SchedulersAdd
 import android.content.Context
 import android.content.Intent
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import ru.shadowsparky.scheduler.utils.LogUtils
 import ru.shadowsparky.scheduler.NotificationScheduler
@@ -24,7 +25,7 @@ class SchedulersShowModel(
         val POSITION = "POSITION"
     }
 
-    override fun deleteRequest(item: Schedulers, handler: SchedulersAdd.HandleResult) {
+    override fun deleteRequest(item: Schedulers, handler: SchedulersAdd.HandleResult, loading: (Boolean) -> Unit) {
         Observable.just("mock")
                 .observeOn(io.reactivex.schedulers.Schedulers.io())
                 .map { DatabaseInitialization.getDB(context).getSchedulesDB() }
@@ -33,6 +34,9 @@ class SchedulersShowModel(
                 .map { Intent().putExtra(RESULT, data)
                         .putExtra(MODE, DELETE_MODE)
                         .putExtra(POSITION, position)}
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { loading(false) }
+                .observeOn(io.reactivex.schedulers.Schedulers.io())
                 .subscribeBy(
                         onNext = { handler.handleResult(it) },
                         onError = { LogUtils.print("REMOVE ITEM FAILED. ERROR: '$it'") },
@@ -40,7 +44,7 @@ class SchedulersShowModel(
                 )
     }
 
-    override fun scheduleRequest(date: String, time: String, title: String, text: String, callback: SchedulersAdd.HandleResult) {
+    override fun scheduleRequest(date: String, time: String, title: String, text: String, callback: SchedulersAdd.HandleResult, loading: (Boolean) -> Unit) {
         val db = DatabaseInitialization.getDB(context).getSchedulesDB()
         val data = Schedulers()
         Observable.just(data)
@@ -58,6 +62,9 @@ class SchedulersShowModel(
                 .map { Intent().putExtra("RESULT", it)
                         .putExtra(MODE, UPDATE_MODE)
                         .putExtra(POSITION, position)}
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { loading(false) }
+                .observeOn(io.reactivex.schedulers.Schedulers.io())
                 .subscribeBy (
                         onNext = { callback.handleResult(it) },
                         onError = { LogUtils.print("UPDATE SCHEDULE ERROR: $it") },
@@ -65,7 +72,7 @@ class SchedulersShowModel(
                 )
     }
 
-    override fun taskRequest(title: String, text: String, callback: SchedulersAdd.HandleResult) {
+    override fun taskRequest(title: String, text: String, callback: SchedulersAdd.HandleResult, loading: (Boolean) -> Unit) {
         val db = DatabaseInitialization.getDB(context).getSchedulesDB()
         val data = Schedulers()
         Observable.just(data)
@@ -81,6 +88,9 @@ class SchedulersShowModel(
                 .map { Intent().putExtra("RESULT", it)
                         .putExtra(MODE, UPDATE_MODE)
                         .putExtra(POSITION, position)}
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { loading(false) }
+                .observeOn(io.reactivex.schedulers.Schedulers.io())
                 .subscribeBy (
                         onNext = { callback.handleResult(it) },
                         onError = { LogUtils.print("UPDATE TASK ERROR: $it") },

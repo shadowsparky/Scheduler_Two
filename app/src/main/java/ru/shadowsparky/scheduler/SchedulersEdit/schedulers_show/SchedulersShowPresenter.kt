@@ -11,7 +11,7 @@ class SchedulersShowPresenter(
     init {
         view.enableChecking()
     }
-    override fun onScheduleDelete(item: Schedulers, handler: SchedulersAdd.HandleResult) {
-        model.deleteRequest(item, handler)
+    override fun onScheduleDelete(item: Schedulers, handler: SchedulersAdd.HandleResult, loading: (Boolean) -> Unit) {
+        model.deleteRequest(item, handler, loading)
     }
 }

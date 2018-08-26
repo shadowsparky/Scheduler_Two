@@ -7,14 +7,15 @@ interface SchedulersAdd {
         fun showToast(message_id: Int)
         fun hide(intent: Intent)
         fun enableChecking()
+        fun setLoading(result: Boolean)
     }
     interface SchedulersAddPresenter {
         fun onEnableChecking()
-        fun onFinish(date: String, time: String, title: String, text: String, callback: HandleResult)
+        fun onFinish(date: String, time: String, title: String, text: String, callback: HandleResult, loading: (Boolean) -> Unit)
     }
     interface SchedulersAddModel {
-        fun taskRequest(title: String, text: String, callback: HandleResult)
-        fun scheduleRequest(date: String, time: String, title: String, text: String, callback: HandleResult)
+        fun taskRequest(title: String, text: String, callback: HandleResult, loading: (Boolean) -> Unit)
+        fun scheduleRequest(date: String, time: String, title: String, text: String, callback: HandleResult, loading: (Boolean) -> Unit)
     }
     interface HandleResult {
         fun handleResult(intent: Intent)

@@ -15,4 +15,5 @@
     <string name="schedule_add">Добавить напоминание</string>
     <string name="remove">Удалить</string>
     <string name="set_time">Установить время</string>
+    <string name="your_schedulers">Здесь будут ваши напоминания и заметки</string>
 </resources>

@@ -7,6 +7,8 @@ package ru.shadowsparky.scheduler.schedulers_menu
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityOptionsCompat
@@ -23,6 +25,7 @@ import ru.shadowsparky.scheduler.utils.LogUtils
 
 
 class SchedulersView : AppCompatActivity(), SchedulersMenu.SchedulersView {
+
     companion object {
         val APPOINTMENT_SHOW_CODE = 1
         val APPOINTMENT_ADD_CODE = 0
@@ -44,15 +47,43 @@ class SchedulersView : AppCompatActivity(), SchedulersMenu.SchedulersView {
                 navigateToAppointmentShow(data, card, position)
             }
         }
-        presenter.onSchedulesLoading()
+    }
+
+    override fun setListVisible(result: Boolean) {
+        if (result) {
+            list_empty.visibility = GONE
+            list.visibility = VISIBLE
+        } else {
+            list_empty.visibility = VISIBLE
+            list.visibility = GONE
+        }
+    }
+
+    override fun setLoading(result: Boolean) {
+        if (result)
+            add_loading.visibility = VISIBLE
+        else
+            add_loading.visibility = GONE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
+                adapter?: presenter.onSchedulesLoading()
                 val position = data!!.getIntExtra(POSITION, -1)
                 val item = data!!.getSerializableExtra("RESULT") as ru.shadowsparky.scheduler.room_utils.Schedulers
                 val mode = data?.getStringExtra(MODE)
                 presenter.onSchedulesListEdited(mode, requestCode, item, position)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (adapter == null) {
+            presenter.onSchedulesLoading()
+        } else if (adapter!!.itemCount == 0) {
+            setListVisible(false)
+        } else {
+            setListVisible(true)
         }
     }
 

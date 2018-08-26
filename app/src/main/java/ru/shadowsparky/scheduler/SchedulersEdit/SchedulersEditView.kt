@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_schedulers_add.*
@@ -27,6 +29,13 @@ abstract class SchedulersEditView() : SchedulersAdd.SchedulersAddView, AppCompat
     protected var presenter: SchedulersAdd.SchedulersAddPresenter? = null
     override fun showToast(message_id: Int) = Toast.makeText(this, message_id, Toast.LENGTH_SHORT).show()
 
+    override fun setLoading(result: Boolean) {
+        if (result) {
+            add_loading.visibility = VISIBLE
+        } else {
+            add_loading.visibility = GONE
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,10 +67,11 @@ abstract class SchedulersEditView() : SchedulersAdd.SchedulersAddView, AppCompat
             ScheduleDialog(this, setTimeCallback, date, time).show()
             return@setOnMenuItemClickListener true
         }
+        val loading: (Boolean) -> Unit = { setLoading(it) }
         addButton.setOnMenuItemClickListener {
             if (check) {
                 presenter?.onFinish(date, time, choosed_title.text.toString(),
-                        choosed_text.text.toString(), schedule_menu_utils.resultCallback())
+                        choosed_text.text.toString(), schedule_menu_utils.resultCallback(), loading)
             } else {
                 choosed_text.error = "Это поле обязательно для заполнения"
             }
@@ -71,7 +81,7 @@ abstract class SchedulersEditView() : SchedulersAdd.SchedulersAddView, AppCompat
             val removeScheduleButton = utils.getItem(menu!!, R.id.schedule_delete)
             removeScheduleButton.isVisible = true
             removeScheduleButton.setOnMenuItemClickListener {
-                (presenter as SchedulersShowPresenter).onScheduleDelete(item!!, schedule_menu_utils.resultCallback())
+                (presenter as SchedulersShowPresenter).onScheduleDelete(item!!, schedule_menu_utils.resultCallback(), loading)
                 return@setOnMenuItemClickListener true
             }
         }

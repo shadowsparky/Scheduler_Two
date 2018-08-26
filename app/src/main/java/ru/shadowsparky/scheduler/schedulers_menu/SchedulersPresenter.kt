@@ -31,12 +31,20 @@ class SchedulersPresenter(
     }
 
     override fun onSchedulesLoading() {
+        view.setLoading(true)
         Observable.just("fake")
                 .observeOn(Schedulers.io())
                 .map { model.getDataFromDB() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy (
-                        onNext = { view.setAdapter(it) },
+                        onNext = {
+                            if (it.isNotEmpty()) {
+                                view.setListVisible(true)
+                                view.setAdapter(it)
+                            } else
+                                view.setListVisible(false)
+                            view.setLoading(false)
+                        },
                         onError = { LogUtils.print("ERROR: Adapter can't setting. '$it'")}
                 )
     }

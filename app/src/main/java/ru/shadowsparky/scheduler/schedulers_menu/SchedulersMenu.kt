@@ -13,6 +13,8 @@ interface SchedulersMenu {
         fun updateItem(item: Schedulers, index: Int)
         fun removeItem(index: Int)
         fun addItem(item: Schedulers)
+        fun setLoading(result: Boolean)
+        fun setListVisible(result: Boolean)
     }
     interface SchedulersPresenter {
         fun onAddAppointmentClicked()
