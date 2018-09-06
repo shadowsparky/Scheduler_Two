@@ -25,8 +25,8 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <activity android:name="ru.shadowsparky.scheduler.SchedulersEdit.schedulers_show.SchedulersShowView"></activity>
-        <activity android:name="ru.shadowsparky.scheduler.SchedulersEdit.schedulers_add.SchedulersAddView"></activity>
+        <activity android:name="ru.shadowsparky.scheduler.schedulers_edit.schedulers_show.SchedulersShowView"></activity>
+        <activity android:name="ru.shadowsparky.scheduler.schedulers_edit.schedulers_add.SchedulersAddView"></activity>
     </application>
 
 </manifest>

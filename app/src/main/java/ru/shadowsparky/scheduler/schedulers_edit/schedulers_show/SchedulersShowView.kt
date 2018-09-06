@@ -1,8 +1,8 @@
-package ru.shadowsparky.scheduler.SchedulersEdit.schedulers_show
+package ru.shadowsparky.scheduler.schedulers_edit.schedulers_show
 
 import kotlinx.android.synthetic.main.activity_schedulers_add.*
 import ru.shadowsparky.scheduler.room_utils.Schedulers
-import ru.shadowsparky.scheduler.SchedulersEdit.SchedulersEditView
+import ru.shadowsparky.scheduler.schedulers_edit.SchedulersEditView
 
 
 class SchedulersShowView : SchedulersEditView(), SchedulersShow.View{

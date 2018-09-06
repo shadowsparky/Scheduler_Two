@@ -1,7 +1,6 @@
-package ru.shadowsparky.scheduler.SchedulersEdit
+package ru.shadowsparky.scheduler.schedulers_edit
 
-import io.reactivex.Scheduler
-import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_add.SchedulersAdd
+import ru.shadowsparky.scheduler.schedulers_edit.schedulers_add.SchedulersAdd
 
 abstract class SchedulersEditPresenter(
         private var model: SchedulersAdd.SchedulersAddModel,

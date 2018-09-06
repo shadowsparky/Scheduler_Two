@@ -4,9 +4,9 @@ import android.content.Intent
 import android.widget.Button
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.subjects.PublishSubject
-import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_add.SchedulersAdd
+import ru.shadowsparky.scheduler.schedulers_edit.schedulers_add.SchedulersAdd
 
-open class Schedule_Menu_Utils(private val view: SchedulersAdd.SchedulersAddView) {
+open class ScheduleMenuUtils(private val view: SchedulersAdd.SchedulersAddView) {
 
     fun getChooseCallback(button: Button) : PublishSubject<String> {
         val callback = PublishSubject.create<String>()

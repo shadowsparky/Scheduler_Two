@@ -1,6 +1,6 @@
-package ru.shadowsparky.scheduler.SchedulersEdit.schedulers_add
+package ru.shadowsparky.scheduler.schedulers_edit.schedulers_add
 
-import ru.shadowsparky.scheduler.SchedulersEdit.SchedulersEditPresenter
+import ru.shadowsparky.scheduler.schedulers_edit.SchedulersEditPresenter
 
 class SchedulersAddPresenter(
         private val view: SchedulersAddView,

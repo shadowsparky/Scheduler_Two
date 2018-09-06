@@ -1,4 +1,4 @@
-package ru.shadowsparky.scheduler.SchedulersEdit.schedulers_add
+package ru.shadowsparky.scheduler.schedulers_edit.schedulers_add
 
 import android.content.Intent
 

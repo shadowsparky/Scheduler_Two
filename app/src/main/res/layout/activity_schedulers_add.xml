@@ -9,7 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/AppThemeWithoutBar"
-    tools:context=".SchedulersEdit.schedulers_add.SchedulersAddView">
+    tools:context=".schedulers_edit.schedulers_add.SchedulersAddView">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/add_toolbar"

@@ -1,4 +1,4 @@
-package ru.shadowsparky.scheduler.SchedulersEdit
+package ru.shadowsparky.scheduler.schedulers_edit
 
 import android.app.Activity
 import android.content.Intent
@@ -13,15 +13,15 @@ import kotlinx.android.synthetic.main.activity_schedulers_add.*
 import ru.shadowsparky.scheduler.R
 import ru.shadowsparky.scheduler.dialogs.ScheduleDialog
 import ru.shadowsparky.scheduler.room_utils.Schedulers
-import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_add.SchedulersAdd
-import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_show.SchedulersShowPresenter
+import ru.shadowsparky.scheduler.schedulers_edit.schedulers_add.SchedulersAdd
+import ru.shadowsparky.scheduler.schedulers_edit.schedulers_show.SchedulersShowPresenter
 import ru.shadowsparky.scheduler.utils.MenuUtils
-import ru.shadowsparky.scheduler.utils.Schedule_Menu_Utils
+import ru.shadowsparky.scheduler.utils.ScheduleMenuUtils
 import ru.shadowsparky.scheduler.utils.Validator
 
 abstract class SchedulersEditView() : SchedulersAdd.SchedulersAddView, AppCompatActivity() {
     protected var check = false
-    protected val schedule_menu_utils = Schedule_Menu_Utils(this)
+    protected val schedule_menu_utils = ScheduleMenuUtils(this)
     protected val utils = MenuUtils()
     protected var date = ""
     protected var time = ""

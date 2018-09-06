@@ -1,7 +1,7 @@
-package ru.shadowsparky.scheduler.SchedulersEdit.schedulers_show
+package ru.shadowsparky.scheduler.schedulers_edit.schedulers_show
 
 import ru.shadowsparky.scheduler.room_utils.Schedulers
-import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_add.SchedulersAdd
+import ru.shadowsparky.scheduler.schedulers_edit.schedulers_add.SchedulersAdd
 
 interface SchedulersShow {
     interface View : SchedulersAdd.SchedulersAddView {

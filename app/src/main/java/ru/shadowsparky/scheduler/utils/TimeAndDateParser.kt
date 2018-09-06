@@ -1,4 +1,4 @@
-package ru.shadowsparky.scheduler
+package ru.shadowsparky.scheduler.utils
 
 open class TimeAndDateParser() {
     companion object {

@@ -1,9 +1,8 @@
-package ru.shadowsparky.scheduler.SchedulersEdit.schedulers_add
+package ru.shadowsparky.scheduler.schedulers_edit.schedulers_add
 
 import android.content.Context
 import android.content.Intent
 import io.reactivex.Observable
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import ru.shadowsparky.scheduler.utils.LogUtils

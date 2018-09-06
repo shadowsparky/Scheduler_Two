@@ -6,8 +6,8 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import ru.shadowsparky.scheduler.schedulers_menu.SchedulersView.Companion.APPOINTMENT_ADD_CODE
 import ru.shadowsparky.scheduler.schedulers_menu.SchedulersView.Companion.APPOINTMENT_SHOW_CODE
-import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_show.SchedulersShowModel.Companion.DELETE_MODE
-import ru.shadowsparky.scheduler.SchedulersEdit.schedulers_show.SchedulersShowModel.Companion.UPDATE_MODE
+import ru.shadowsparky.scheduler.schedulers_edit.schedulers_show.SchedulersShowModel.Companion.DELETE_MODE
+import ru.shadowsparky.scheduler.schedulers_edit.schedulers_show.SchedulersShowModel.Companion.UPDATE_MODE
 import ru.shadowsparky.scheduler.utils.LogUtils
 
 class SchedulersPresenter(
@@ -32,7 +32,7 @@ class SchedulersPresenter(
 
     override fun onSchedulesLoading() {
         view.setLoading(true)
-        Observable.just("fake")
+        Observable.just("")
                 .observeOn(Schedulers.io())
                 .map { model.getDataFromDB() }
                 .observeOn(AndroidSchedulers.mainThread())
@@ -40,9 +40,9 @@ class SchedulersPresenter(
                         onNext = {
                             if (it.isNotEmpty()) {
                                 view.setListVisible(true)
-                                view.setAdapter(it)
                             } else
                                 view.setListVisible(false)
+                            view.setAdapter(it)
                             view.setLoading(false)
                         },
                         onError = { LogUtils.print("ERROR: Adapter can't setting. '$it'")}
