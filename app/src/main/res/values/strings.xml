@@ -16,4 +16,5 @@
     <string name="remove">Удалить</string>
     <string name="set_time">Установить время</string>
     <string name="your_schedulers">Здесь будут ваши напоминания и заметки</string>
+    <string name="exit">Выпилиться</string>
 </resources>

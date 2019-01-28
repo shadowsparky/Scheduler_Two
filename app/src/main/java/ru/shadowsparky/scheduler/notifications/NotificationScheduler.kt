@@ -29,7 +29,7 @@ open class NotificationScheduler(val context: Context) {
     }
 
     fun scheduleNotification(date: String, time: String, title: String, text: String, id: Int) {
-        val thread = Thread() {
+        val thread = Thread {
             val parsed_date = TimeAndDateParser.parseDate(date)
             val parsed_time = TimeAndDateParser.parseTime(time)
             val calendar = NotificationScheduler

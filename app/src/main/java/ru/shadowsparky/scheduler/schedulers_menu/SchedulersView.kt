@@ -7,6 +7,7 @@ package ru.shadowsparky.scheduler.schedulers_menu
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,7 @@ import ru.shadowsparky.scheduler.schedulers_edit.schedulers_show.SchedulersShowM
 import ru.shadowsparky.scheduler.schedulers_edit.schedulers_show.SchedulersShowModel.Companion.POSITION
 import ru.shadowsparky.scheduler.schedulers_edit.schedulers_show.SchedulersShowView
 import ru.shadowsparky.scheduler.utils.LogUtils
+import ru.shadowsparky.scheduler.utils.MenuUtils
 
 
 class SchedulersView : AppCompatActivity(), SchedulersMenu.SchedulersView {
@@ -34,6 +36,7 @@ class SchedulersView : AppCompatActivity(), SchedulersMenu.SchedulersView {
     private lateinit var presenter: SchedulersMenu.SchedulersPresenter
     private var itemTouched: SchedulersMenu.Touch? = null
     private var adapter: SchedulersList? = null
+    private val utils = MenuUtils()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
